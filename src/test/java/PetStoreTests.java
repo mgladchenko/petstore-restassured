@@ -8,7 +8,7 @@ public class PetStoreTests {
 
     @Test
     public void getPetById200() {
-        baseSpecification()
+        given()
                 .basePath(Config.GET_PET_ENDPOINT)
                 .pathParam("id", 1)
                 .get()
@@ -23,12 +23,6 @@ public class PetStoreTests {
                 .log().uri()
                 .get()
                 .then().statusCode(404);
-    }
-
-    private RequestSpecification baseSpecification() {
-        return RestAssured.given()
-                .baseUri(Config.PET_STORE_BASE_URI)
-                .log().uri();
     }
 
 }
