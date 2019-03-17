@@ -1,40 +1,50 @@
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.specification.RequestSpecification;
-import org.testng.annotations.Test;
+import io.restassured.response.ValidatableResponse;
+import net.thucydides.core.annotations.Steps;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import net.serenitybdd.junit.runners.SerenityRunner;
 
+
+import static org.hamcrest.Matchers.is;
+
+@RunWith(SerenityRunner.class)
 public class PetStoreTests {
 
-    final static PetEndpoint PET_ENDPOINT = new PetEndpoint();
+    //final static PetEndpoint PET_ENDPOINT = new PetEndpoint();
+
+    @Steps
+    protected PetEndpoint petEndpoint;
 
     @Test
     public void getPetById200() {
-        PET_ENDPOINT
+        petEndpoint
                 .getPetById(1)
                 .then().statusCode(200);
     }
 
     @Test
     public void getPetById404() {
-        PET_ENDPOINT
+        petEndpoint
                 .getPetById(0)
                 .then().statusCode(404);
     }
 
     @Test
     public void getPetByStatus200() {
-        PET_ENDPOINT
+        petEndpoint
                 .getPetByStatus("available")
                 .then().statusCode(200);
     }
 
     @Test
     public void createPet() {
-        PetEntity petEntity = new PetEntity(5, "zombie", "available");
-        PET_ENDPOINT
-                .createPet(petEntity)
-                .then().statusCode(200);
+        int petId = 5;
+        PetEntity petEntity = new PetEntity(petId, "zombie", "available");
 
+        ValidatableResponse response = petEndpoint
+                .createPet(petEntity)
+                .then().statusCode(200)
+                .and().body("id", is(petId));
     }
 
 }
