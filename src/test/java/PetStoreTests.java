@@ -7,18 +7,16 @@ public class PetStoreTests {
 
 
     @Test
-    public void getPetById200 () {
-        RestAssured
-                .given()
+    public void getPetById200() {
+        baseSpecification()
                 .basePath(Config.GET_PET_ENDPOINT)
                 .pathParam("id", 1)
-                .log().uri()
                 .get()
                 .then().statusCode(200);
     }
 
     @Test
-    public void getPetById404 () {
+    public void getPetById404() {
         RestAssured
                 .given()
                 .baseUri("https://petstore.swagger.io/v2/pet/0")
@@ -27,8 +25,10 @@ public class PetStoreTests {
                 .then().statusCode(404);
     }
 
-    public RequestSpecification given() {
-        return new RequestSpecBuilder().setBasePath(Config.PET_STORE_BASE_URI).build();
+    private RequestSpecification baseSpecification() {
+        return RestAssured.given()
+                .baseUri(Config.PET_STORE_BASE_URI)
+                .log().uri();
     }
 
 }
