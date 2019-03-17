@@ -5,13 +5,12 @@ import org.testng.annotations.Test;
 
 public class PetStoreTests {
 
+    final PetEndpoint PET_ENDPOINT = new PetEndpoint();
 
     @Test
     public void getPetById200() {
-        given()
-                .basePath(Config.GET_PET_ENDPOINT)
-                .pathParam("id", 1)
-                .get()
+        PET_ENDPOINT
+                .getPetById(1)
                 .then().statusCode(200);
     }
 
