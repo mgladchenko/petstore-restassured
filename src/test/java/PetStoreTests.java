@@ -30,26 +30,9 @@ public class PetStoreTests {
 
     @Test
     public void createPet() {
-        String body = "{\n" +
-                "  \"id\": 33,\n" +
-                "  \"category\": {\n" +
-                "    \"id\": 33,\n" +
-                "    \"name\": \"string\"\n" +
-                "  },\n" +
-                "  \"name\": \"snoop_dog\",\n" +
-                "  \"photoUrls\": [\n" +
-                "    \"string\"\n" +
-                "  ],\n" +
-                "  \"tags\": [\n" +
-                "    {\n" +
-                "      \"id\": 0,\n" +
-                "      \"name\": \"string\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"status\": \"available\"\n" +
-                "}";
+        PetEntity petEntity = new PetEntity(5, "zombie", "available");
         PET_ENDPOINT
-                .createPet(body)
+                .createPet(petEntity)
                 .then().statusCode(200);
 
     }
