@@ -27,10 +27,10 @@ public class PetEndpoint {
                 .then().extract().response();
     }
 
-    public Response createPet() {
+    public Response createPet(String body) {
         return given()
                 .basePath(Config.CREATE_PET)
-                .body("")
+                .body(body)
                 .post()
                 .then().extract().response();
     }

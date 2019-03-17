@@ -31,12 +31,12 @@ public class PetStoreTests {
     @Test
     public void createPet() {
         String body = "{\n" +
-                "  \"id\": 0,\n" +
+                "  \"id\": 33,\n" +
                 "  \"category\": {\n" +
-                "    \"id\": 0,\n" +
+                "    \"id\": 33,\n" +
                 "    \"name\": \"string\"\n" +
                 "  },\n" +
-                "  \"name\": \"doggie\",\n" +
+                "  \"name\": \"snoop_dog\",\n" +
                 "  \"photoUrls\": [\n" +
                 "    \"string\"\n" +
                 "  ],\n" +
@@ -48,6 +48,10 @@ public class PetStoreTests {
                 "  ],\n" +
                 "  \"status\": \"available\"\n" +
                 "}";
+        PET_ENDPOINT
+                .createPet(body)
+                .then().statusCode(200);
+
     }
 
 }
