@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 public class PetStoreTests {
 
-    final PetEndpoint PET_ENDPOINT = new PetEndpoint();
+    final static PetEndpoint PET_ENDPOINT = new PetEndpoint();
 
     @Test
     public void getPetById200() {
@@ -16,12 +16,16 @@ public class PetStoreTests {
 
     @Test
     public void getPetById404() {
-        RestAssured
-                .given()
-                .baseUri("https://petstore.swagger.io/v2/pet/0")
-                .log().uri()
-                .get()
+        PET_ENDPOINT
+                .getPetById(0)
                 .then().statusCode(404);
+    }
+
+    @Test
+    public void getPetByStatus200() {
+        PET_ENDPOINT
+                .getPetByStatus("available")
+                .then().statusCode(200);
     }
 
 }

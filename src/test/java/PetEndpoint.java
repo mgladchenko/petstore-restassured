@@ -12,10 +12,17 @@ public class PetEndpoint {
 
     public Response getPetById(int petId) {
         return given()
-                .basePath(Config.GET_PET_ENDPOINT)
+                .basePath(Config.GET_PET_BY_ID)
                 .pathParam("id", petId)
                 .get()
                 .then().extract().response();
+    }
 
+    public Response getPetByStatus(String status) {
+        return given()
+                .basePath(Config.GET_PET_BY_STATUS)
+                .param("status", status)
+                .get()
+                .then().extract().response();
     }
 }
