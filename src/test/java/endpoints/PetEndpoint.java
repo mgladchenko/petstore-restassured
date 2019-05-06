@@ -1,13 +1,16 @@
-import io.restassured.RestAssured;
+package endpoints;
+
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import models.PetEntity;
+import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
 
 public class PetEndpoint {
 
     private RequestSpecification given() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        return RestAssured.given()
+        SerenityRest.enableLoggingOfRequestAndResponseIfValidationFails();
+        return SerenityRest.given()
                 .baseUri(Config.PET_STORE_BASE_URI)
                 .contentType("application/json")
                 .log().uri();

@@ -1,4 +1,8 @@
+package tests;
+
+import endpoints.PetEndpoint;
 import io.restassured.response.ValidatableResponse;
+import models.PetEntity;
 import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +13,6 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SerenityRunner.class)
 public class PetStoreTests {
-
-    //final static PetEndpoint PET_ENDPOINT = new PetEndpoint();
 
     @Steps
     protected PetEndpoint petEndpoint;
